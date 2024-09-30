@@ -1,16 +1,19 @@
+
 VAR hasSeenUncle = false
 
-* [START] -> Boat
+* [START] 
+
+-> Boat
 
 ===Boat===
-{not Boat: It's not the first time you've been on a ferry, but it's the first time you've been to high seas, and the first trip that is taking more than 3 hours. | I saw the boat already}
+{It's not the first time you've been on a ferry, but it's the first time you've been to high seas, and the first trip that is taking more than 3 hours. | You take a deep breath, this ferry trip has been taking forever}
 
 * ["Why am I doing this again?"] -> why
 
 * ["An island on the horizon..."] -> island
 
 ==why==
-You and your Uncle Syd have been exchanging bottles since you left for college two years ago. He was never around when you were young and your father rarely talked about his brother. You learnt from a cousin that Uncle Syd has been excommunicated about 16 years ago, when you were only 4. 
+You and Uncle Syd have been exchanging bottles since you left for college two years ago. He was never around when you were young and your father rarely talked about his brother. You learnt from a cousin that Uncle Syd has been excommunicated about 16 years ago, when you were only 4. 
 
 * ["What then?"]
 
@@ -30,13 +33,57 @@ While I know he's just playing me, I think it's the perfect opportunity to learn
 
 ==island==
 
--> Docks
+In the distance you finally see Candy Mountain Island. It's a small island, with a single mountain on it. You can see a village from far away, looks like a few buildings made with wood and rocks.
+
+* ["I should gather my things and get ready to unboard".] -> unboard
+
+* ["Isn't there anyone else on this ferry?".] -> anyone
+
+==anyone==
+
+There doesn't seem to be anyone else on the ferry. Besides the capitan. The whole ferry is loaded with boxes, probably supriments for the island. Since you're doing this under your family's nose, you had to get the cheapest ticked available, that meant taking the ferry during the early break of dawn. 
+-> unboard
+
+==unboard==
+
+You return to the bench you left your suitcase. You didn't bring much, you're not even sure how much time you'll spend here. In the case of something happening you have enough gold to get back home. 
+
+*["Father won't be happy if he learns about this trip"] ->
+
+You wait for the captain to come down and lower a small bridge to the docs. 
+
+"Here you go kid".
+
+* * "I'm not a kid sir[".], I just turned twenty"
+    
+    "Oh you're not? Sorry about that young man" 
+    
+    -> Docks
+    
+* * "Thank you sir". 
+
+    -> Docks
 
 ===Docks===
+{You're at the docs.|You're back at the docs.} 
+{not hasSeenUncle :Things looks very busy. If you follow the road on the left, you'll reach the Bottle Message Center, if you follow the one on the right you'll reach your Uncle's tavern.}
 
-You're at the docs. {not hasSeenUncle :The thing looks very busy. If you follow the road on the left, you'll reach the Bottle Message Center, if you follow the one on the right you'll reach your Uncle's taver. No time to waste! }.
+{hasSeenUncle: + [Go to the bottlery] -> Bottlery}
 
-+ [Go to the bottlery] -> Bottlery
+{hasSeenUncle and not BottleryNot:
+	+ [Go to the bottlery] -> Bottlery
+- else:
+	+ [Go to the bottlery] -> BottleryNot
+}
+
++ [Go to the tavern] -> Tavern
+
+==BottleryNot==
+Nope. No time to get to know the village. Let's first get aquainted with our Uncle. It's been 16 years! You must catch up before anything else. 
+
+And breakfast. 
+
+You should be starving
 
 + [Go to the tavern] -> Tavern
 
